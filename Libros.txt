@@ -1,0 +1,6 @@
+82,Stephen King,It,1
+34,Marguerite Duras,El amante,3
+78,H.G. Wells,La guerra de los mundos,2
+12,Nicholas Sparks,The Notebook,4
+75,John Carlin,La sonrisa de Mandela,6
+35,Miguel Silveira,El camino de las hormigas,7

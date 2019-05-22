@@ -1,0 +1,7 @@
+1,Terror
+2,Ficción
+3,Romántico
+4,Negro
+5,Histórico
+6,Biográfico
+7,Autoayuda
