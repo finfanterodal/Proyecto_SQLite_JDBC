@@ -20,11 +20,22 @@ public class Conexion {
     private static Driver driver = null;
 
     //Carga del driver y conexión
+
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(JDBC_URL);
     }
 
     //Close objeto ResulSet
+
+    /**
+     *
+     * @param rs
+     */
     public static void close(ResultSet rs) {
         try {
             if (rs != null) {
@@ -35,6 +46,11 @@ public class Conexion {
         }
     }
   //Cerramos el objeto PreparedStatement
+
+    /**
+     *
+     * @param stmt
+     */
     public static void close(PreparedStatement stmt) {
         try {
             if (stmt != null) {
@@ -45,6 +61,11 @@ public class Conexion {
         }
     }
     //Cerramos la conexión
+
+    /**
+     *
+     * @param conn
+     */
     public static void close(Connection conn) {
         try {
             if (conn != null) {
@@ -58,7 +79,6 @@ public class Conexion {
     /**
      * Connect to a sample database
      *
-     * @param fileName the database file name
      */
     public static void createNewDatabas() {
 

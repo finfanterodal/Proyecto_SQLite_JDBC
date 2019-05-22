@@ -1,6 +1,5 @@
 package libreriaUI;
 
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -16,6 +15,9 @@ import libreria.jdbc.LibroDaoJDBC;
  */
 public class TablaLibro extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     public static int isbnTemp = 0;
 
     /**

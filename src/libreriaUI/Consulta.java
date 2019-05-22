@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import libreria.jdbc.LibroDaoJDBC;
 
-
 /**
  *
  * @author Fran

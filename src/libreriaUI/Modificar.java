@@ -1,13 +1,11 @@
 package libreriaUI;
 
-
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import libreria.dto.LibroDTO;
 import libreria.jdbc.LibroDaoJDBC;
 import static libreriaUI.TablaLibro.isbnTemp;
-
 
 /**
  *

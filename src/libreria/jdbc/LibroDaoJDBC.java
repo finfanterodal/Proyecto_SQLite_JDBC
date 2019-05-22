@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import libreria.dto.GeneroDTO;
 import libreria.dto.LibroDTO;
 import static libreria.jdbc.Conexion.createNewDatabas;
@@ -25,10 +23,17 @@ import static libreria.jdbc.Conexion.createNewDatabas;
 public class LibroDaoJDBC {
 
     //Constructor vacío
+    /**
+     *
+     */
     public LibroDaoJDBC() {
     }
 
     //Utilizar la misma conexion para todas las acciones
+    /**
+     *
+     * @param userConn
+     */
     public LibroDaoJDBC(Connection userConn) {
         this.userConn = userConn;
     }
@@ -40,6 +45,14 @@ public class LibroDaoJDBC {
     private String sql_DELETE;
     private String sql_SELECT;
 
+    /**
+     * Método que ejecuta la sentencia INSERT, recibiendo un objeto de tipo
+     * LibroDTO dónde se guardan los datos que se deben insertar.
+     *
+     * @param libro
+     * @return rows número de registros realizados.
+     * @throws SQLException
+     */
     public int insertLibro(LibroDTO libro) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -69,6 +82,14 @@ public class LibroDaoJDBC {
         return rows;
     }
 
+    /**
+     * Método que ejecuta la sentencia UPDATE, recibiendo un objeto de tipo
+     * Libro con los valores que se desean modificar y el identificador.
+     *
+     * @param libro Objeto de LibroDTO
+     * @return rows nñumero de registros realizados
+     * @throws SQLException
+     */
     public int updateLibro(LibroDTO libro) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -102,6 +123,14 @@ public class LibroDaoJDBC {
         return rows;
     }
 
+    /**
+     * Método que lanza una sentencia de DELETE dado el PRIMARY KEY de un libro,
+     * el isbn.
+     *
+     * @param valorIsbn
+     * @return int número de registros realizados.
+     * @throws SQLException
+     */
     public int deleteLibro(int valorIsbn) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -127,6 +156,12 @@ public class LibroDaoJDBC {
         return rows;
     }
 
+    /**
+     *
+     * @param valorSelect
+     * @param valor
+     * @throws SQLException
+     */
     public void selectLibro(int valorSelect, String valor) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -139,7 +174,7 @@ public class LibroDaoJDBC {
             } else {
                 conn = Conexion.getConnection();
             }
-            switch ( valorSelect) {
+            switch (valorSelect) {
                 case 0://Libros con Isbn
                     sql_SELECT = "SELECT isbn,autor,titulo,idGenero FROM libros WHERE isbn = ?";
                     stmt = conn.prepareStatement(sql_SELECT);
@@ -200,6 +235,8 @@ public class LibroDaoJDBC {
      * Hace un select de la base de datos de todos los libros y los carga en
      * este Array borrando los datos que ya contenía.
      *
+     * @return
+     * @throws java.sql.SQLException
      */
     public ArrayList<LibroDTO> refreshArrayLibro() throws SQLException {
         ArrayList<LibroDTO> libros = new ArrayList<LibroDTO>();
@@ -235,6 +272,8 @@ public class LibroDaoJDBC {
      * Hace un select de la base de datos de todos los generos y los carga en
      * este Array borrando los datos que ya contenía.
      *
+     * @return
+     * @throws java.sql.SQLException
      */
     public ArrayList<GeneroDTO> refreshArrayGenero() throws SQLException {
         ArrayList<GeneroDTO> generos = new ArrayList<GeneroDTO>();
@@ -386,6 +425,10 @@ public class LibroDaoJDBC {
 
     }
 
+    /**
+     * Método para inicializar el programa si la base de datos aún no fue
+     * creada.
+     */
     public void init() {
 
         File fichero = new File("libreria.db");
