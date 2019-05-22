@@ -1,9 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package javajdbc_sqlite;
+
+import java.io.File;
+import libreria.jdbc.LibroDaoJDBC;
+import libreriaUI.MenuTablas;
 
 /**
  *
@@ -15,7 +14,11 @@ public class JavaJDBC_SQLite {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        LibroDaoJDBC li = new LibroDaoJDBC();
+        li.init();
+
+        MenuTablas menu = new MenuTablas();
+        menu.setVisible(true);
     }
-    
+
 }

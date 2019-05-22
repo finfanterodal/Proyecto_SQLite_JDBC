@@ -1,6 +1,7 @@
 package libreria.jdbc;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,8 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class Conexion {
 
-    private static final String JDBC_DRIVER = "D:\\NetBeansProjects\\SQLiteJDBC\\JavaJDBC_SQLite";
-    private static final String JDBC_URL = "jdbc:jdbc:sqlite:libreria.db";
+    private static final String JDBC_DRIVER = "org.sqlite.JDBC";
+    private static final String JDBC_URL = "jdbc:sqlite:libreria.db";
     private static Driver driver = null;
 
     //Carga del driver y conexión
@@ -60,6 +61,28 @@ public class Conexion {
             }
         } catch (SQLException sqle) {
             sqle.printStackTrace();
+        }
+    }
+
+    /**
+     * Connect to a sample database
+     *
+     * @param fileName the database file name
+     */
+    public static void createNewDatabas() {
+
+        String url = "jdbc:sqlite:libreria.db";
+
+        try (Connection conn = DriverManager.getConnection(url)) {
+            if (conn != null) {
+                DatabaseMetaData meta = conn.getMetaData();
+                System.out.println("The driver name is " + meta.getDriverName());
+                System.out.println("A new database has been created.");
+                conn.close();
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
