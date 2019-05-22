@@ -3,6 +3,7 @@ package libreriaUI;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import libreria.jdbc.LibroDaoJDBC;
 
 
@@ -96,15 +97,18 @@ public class Consulta extends javax.swing.JFrame {
     private void consultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaButtonActionPerformed
         try {
             //Isbn, autor, titulo, idGenero, Genero, Genero libro particular
+            int valorSelect = consultaCombo.getSelectedIndex();
+            String valorTemp = valorText.getText();
             LibroDaoJDBC li = new LibroDaoJDBC();
-            li.selectLibro(consultaCombo, valorText);
+            li.selectLibro(valorSelect, valorTemp);
             TablaLibro tlibro = new TablaLibro();
             tlibro.setVisible(true);
             this.setVisible(false);
         } catch (SQLException ex) {
             Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Error al introducir el dato.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_consultaButtonActionPerformed
 
     /**

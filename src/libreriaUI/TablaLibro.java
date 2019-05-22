@@ -201,8 +201,7 @@ public class TablaLibro extends javax.swing.JFrame {
 
         } else {
             try {
-                Integer.parseInt(tableLibro.getValueAt(fila, 0).toString());
-                li.deleteLibro(new LibroDTO(Integer.parseInt(tableLibro.getValueAt(fila, 0).toString())));
+                li.deleteLibro(Integer.parseInt(tableLibro.getValueAt(fila, 0).toString()));
             } catch (SQLException ex) {
                 Logger.getLogger(TablaLibro.class.getName()).log(Level.SEVERE, null, ex);
             }

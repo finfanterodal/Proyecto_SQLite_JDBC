@@ -102,7 +102,7 @@ public class LibroDaoJDBC {
         return rows;
     }
 
-    public int deleteLibro(LibroDTO libro) throws SQLException {
+    public int deleteLibro(int valorIsbn) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -114,7 +114,7 @@ public class LibroDaoJDBC {
                 conn = Conexion.getConnection();
             }
             stmt = conn.prepareStatement(sql_DELETE);
-            stmt.setInt(1, libro.getIdGenero());
+            stmt.setInt(1, valorIsbn);
             JOptionPane.showMessageDialog(null, "Ejecutado correctamente.", "Succed", JOptionPane.INFORMATION_MESSAGE);
             rows = stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registros Borrados: " + rows, "Succed", JOptionPane.INFORMATION_MESSAGE);
@@ -127,11 +127,10 @@ public class LibroDaoJDBC {
         return rows;
     }
 
-    public void selectLibro(JComboBox consulta, JTextField valor) throws SQLException {
+    public void selectLibro(int valorSelect, String valor) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        LibroDTO personaDTO = null;
         String vconsulta = "";
 
         try {
@@ -140,42 +139,42 @@ public class LibroDaoJDBC {
             } else {
                 conn = Conexion.getConnection();
             }
-            switch (consulta.getSelectedIndex()) {
+            switch ( valorSelect) {
                 case 0://Libros con Isbn
                     sql_SELECT = "SELECT isbn,autor,titulo,idGenero FROM libros WHERE isbn = ?";
                     stmt = conn.prepareStatement(sql_SELECT);
-                    stmt.setInt(1, Integer.parseInt(valor.getText()));
+                    stmt.setInt(1, Integer.parseInt(valor));
                     break;
                 case 1://Libros con Autor
                     sql_SELECT = "SELECT isbn,autor,titulo,idGenero FROM libros WHERE autor = ?";
                     stmt = conn.prepareStatement(sql_SELECT);
-                    stmt.setString(1, valor.getText());
+                    stmt.setString(1, valor);
                     break;
                 case 2://Libros con Titulo
                     sql_SELECT = "SELECT isbn,autor,titulo,idGenero FROM libros WHERE titulo = ?";
                     stmt = conn.prepareStatement(sql_SELECT);
-                    stmt.setString(1, valor.getText());
+                    stmt.setString(1, valor);
                     break;
                 case 3://Libros con idGenero
                     sql_SELECT = "SELECT isbn,autor,titulo,idGenero FROM libros WHERE idGenero = ?";
                     stmt = conn.prepareStatement(sql_SELECT);
-                    stmt.setInt(1, Integer.parseInt(valor.getText()));
+                    stmt.setInt(1, Integer.parseInt(valor));
                     break;
                 case 4://Libros con Genero
                     sql_SELECT = "SELECT isbn,autor,titulo,idGenero FROM libros WHERE idGenero IN(SELECT idGenero FROM generos WHERE genero = ?)";
                     stmt = conn.prepareStatement(sql_SELECT);
-                    stmt.setString(1, valor.getText());
+                    stmt.setString(1, valor);
                     break;
                 case 5://Selecciona el génerto de un libros dado su isbn
                     sql_SELECT = "SELECT idGenero,genero FROM generos WHERE idGenero IN(SELECT idGenero FROM libros WHERE isbn = ?)";
                     stmt = conn.prepareStatement(sql_SELECT);
-                    stmt.setInt(1, Integer.parseInt(valor.getText()));
+                    stmt.setInt(1, Integer.parseInt(valor));
                     break;
             }
             rs = stmt.executeQuery();
             // loop through the result set
             while (rs.next()) {
-                if (consulta.getSelectedIndex() != 5) {
+                if (valorSelect != 5) {
                     LibroDTO libro = new LibroDTO(rs.getInt("isbn"), rs.getString("autor"), rs.getString("titulo"), rs.getInt("idGenero"));
                     vconsulta = vconsulta + "\n" + libro.toString();
                 } else {
@@ -388,9 +387,10 @@ public class LibroDaoJDBC {
     }
 
     public void init() {
-        createNewDatabas();
+
         File fichero = new File("libreria.db");
         if (!fichero.exists()) {
+            createNewDatabas();
             crearTablas();
             cargarDatosInicialesGenero();
             cargarDatosInicialesLibro();
