@@ -84,12 +84,12 @@ public class LibroDaoJDBC {
                 conn = Conexion.getConnection();
             }
             stmt = conn.prepareStatement(sql_UPDATE);
-            int index = 1;
             //Libros   
-            stmt.setInt(1, libro.getIsbn());
-            stmt.setString(2, libro.getAutor());
-            stmt.setString(3, libro.getTitulo());
-            stmt.setInt(4, libro.getIdGenero());
+
+            stmt.setString(1, libro.getAutor());
+            stmt.setString(2, libro.getTitulo());
+            stmt.setInt(3, libro.getIdGenero());
+            stmt.setInt(4, libro.getIsbn());
             JOptionPane.showMessageDialog(null, "Ejecutado correctamente.", "Succed", JOptionPane.INFORMATION_MESSAGE);
             rows = stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registros Actualizados: " + rows, "Succed", JOptionPane.INFORMATION_MESSAGE);

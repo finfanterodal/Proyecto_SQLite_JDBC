@@ -16,7 +16,7 @@ import libreria.jdbc.LibroDaoJDBC;
  */
 public class TablaLibro extends javax.swing.JFrame {
 
-    public static int id = 0;
+    public static int isbnTemp = 0;
 
     /**
      * Creates new form TablaLibro
@@ -187,7 +187,7 @@ public class TablaLibro extends javax.swing.JFrame {
         if (fila == -1) {
             JOptionPane.showMessageDialog(null, "No hay ninguna fila seleccionada");
         } else {
-            id = Integer.parseInt(tableLibro.getValueAt(fila, 0).toString());
+            isbnTemp = Integer.parseInt(tableLibro.getValueAt(fila, 0).toString());
             Modificar mod = new Modificar();
             mod.setVisible(true);
             this.setVisible(false);

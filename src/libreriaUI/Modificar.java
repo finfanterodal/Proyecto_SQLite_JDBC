@@ -6,7 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import libreria.dto.LibroDTO;
 import libreria.jdbc.LibroDaoJDBC;
-import static libreriaUI.TablaLibro.id;
+import static libreriaUI.TablaLibro.isbnTemp;
+
 
 /**
  *
@@ -127,7 +128,7 @@ public class Modificar extends javax.swing.JFrame {
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
         try {
             LibroDaoJDBC li = new LibroDaoJDBC();
-            li.updateLibro(new LibroDTO(id, autorText.getText(), tituloText.getText(), idGeneroCombo.getSelectedIndex() + 1));
+            li.updateLibro(new LibroDTO(isbnTemp, autorText.getText(), tituloText.getText(), idGeneroCombo.getSelectedIndex() + 1));
             TablaLibro tlibro = new TablaLibro();
             tlibro.setVisible(true);
             this.setVisible(false);
