@@ -145,7 +145,7 @@ public class Insertar extends javax.swing.JFrame {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "No has introducido isbn.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (SQLException ex) {
-            Logger.getLogger(Insertar.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No has introducido isbn.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         TablaLibro tlibro = new TablaLibro();
         tlibro.setVisible(true);

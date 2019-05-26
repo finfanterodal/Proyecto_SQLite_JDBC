@@ -69,10 +69,10 @@ public class LibroDaoJDBC {
             stmt.setInt(1, libro.getIsbn());
             stmt.setString(2, libro.getAutor());
             stmt.setString(3, libro.getTitulo());
-            stmt.setInt(4, libro.getIdGenero());
-            JOptionPane.showMessageDialog(null, "Ejecutado correctamente.", "Succed", JOptionPane.INFORMATION_MESSAGE);
+            stmt.setInt(4, libro.getIdGenero());      
             rows = stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registros insertados: " + rows, "Succed", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ejecutado correctamente.", "Succed", JOptionPane.INFORMATION_MESSAGE);
         } finally {
             Conexion.close(stmt);
             if (this.userConn == null) {
@@ -111,8 +111,8 @@ public class LibroDaoJDBC {
             stmt.setString(2, libro.getTitulo());
             stmt.setInt(3, libro.getIdGenero());
             stmt.setInt(4, libro.getIsbn());
-            JOptionPane.showMessageDialog(null, "Ejecutado correctamente.", "Succed", JOptionPane.INFORMATION_MESSAGE);
             rows = stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Ejecutado correctamente.", "Succed", JOptionPane.INFORMATION_MESSAGE);
             JOptionPane.showMessageDialog(null, "Registros Actualizados: " + rows, "Succed", JOptionPane.INFORMATION_MESSAGE);
         } finally {
             Conexion.close(stmt);
@@ -144,8 +144,8 @@ public class LibroDaoJDBC {
             }
             stmt = conn.prepareStatement(sql_DELETE);
             stmt.setInt(1, valorIsbn);
-            JOptionPane.showMessageDialog(null, "Ejecutado correctamente.", "Succed", JOptionPane.INFORMATION_MESSAGE);
             rows = stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Ejecutado correctamente.", "Succed", JOptionPane.INFORMATION_MESSAGE);
             JOptionPane.showMessageDialog(null, "Registros Borrados: " + rows, "Succed", JOptionPane.INFORMATION_MESSAGE);
         } finally {
             Conexion.close(stmt);
