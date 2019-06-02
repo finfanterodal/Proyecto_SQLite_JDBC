@@ -3,6 +3,7 @@ package libreriaUI;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import libreria.dto.LibroDTO;
 import libreria.jdbc.LibroDaoJDBC;
 import static libreriaUI.TablaLibro.isbnTemp;
@@ -124,15 +125,12 @@ public class Modificar extends javax.swing.JFrame {
      * desactiva su ventana y abre la anteriro.
      */
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
-        try {
-            LibroDaoJDBC li = new LibroDaoJDBC();
-            li.updateLibro(new LibroDTO(isbnTemp, autorText.getText(), tituloText.getText(), idGeneroCombo.getSelectedIndex() + 1));
-            TablaLibro tlibro = new TablaLibro();
-            tlibro.setVisible(true);
-            this.setVisible(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(Modificar.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        LibroDaoJDBC li = new LibroDaoJDBC();
+        int rows = li.updateLibro(new LibroDTO(isbnTemp, autorText.getText(), tituloText.getText(), idGeneroCombo.getSelectedIndex() + 1));
+        JOptionPane.showMessageDialog(null, "Ejecutado correctamente.", "Succed", JOptionPane.INFORMATION_MESSAGE);
+        TablaLibro tlibro = new TablaLibro();
+        tlibro.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     /**

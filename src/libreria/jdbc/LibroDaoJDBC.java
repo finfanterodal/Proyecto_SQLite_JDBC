@@ -51,9 +51,8 @@ public class LibroDaoJDBC {
      *
      * @param libro
      * @return rows número de registros realizados.
-     * @throws SQLException
      */
-    public int insertLibro(LibroDTO libro) throws SQLException {
+    public int insertLibro(LibroDTO libro) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -65,14 +64,15 @@ public class LibroDaoJDBC {
                 conn = Conexion.getConnection();
             }
             stmt = conn.prepareStatement(sql_INSERT);
-            int index = 1;
             stmt.setInt(1, libro.getIsbn());
             stmt.setString(2, libro.getAutor());
             stmt.setString(3, libro.getTitulo());
-            stmt.setInt(4, libro.getIdGenero());      
-            rows = stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Registros insertados: " + rows, "Succed", JOptionPane.INFORMATION_MESSAGE);
+            stmt.setInt(4, libro.getIdGenero());
+            rows = stmt.executeUpdate();           
             JOptionPane.showMessageDialog(null, "Ejecutado correctamente.", "Succed", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            Logger.getLogger(LibroDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Isbn ya existente.", "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             Conexion.close(stmt);
             if (this.userConn == null) {
@@ -88,9 +88,8 @@ public class LibroDaoJDBC {
      *
      * @param libro Objeto de LibroDTO
      * @return rows nñumero de registros realizados
-     * @throws SQLException
      */
-    public int updateLibro(LibroDTO libro) throws SQLException {
+    public int updateLibro(LibroDTO libro) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -112,8 +111,10 @@ public class LibroDaoJDBC {
             stmt.setInt(3, libro.getIdGenero());
             stmt.setInt(4, libro.getIsbn());
             rows = stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Ejecutado correctamente.", "Succed", JOptionPane.INFORMATION_MESSAGE);
             JOptionPane.showMessageDialog(null, "Registros Actualizados: " + rows, "Succed", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            Logger.getLogger(LibroDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se pudo modificar el libro.", "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             Conexion.close(stmt);
             if (this.userConn == null) {
@@ -129,9 +130,8 @@ public class LibroDaoJDBC {
      *
      * @param valorIsbn
      * @return int número de registros realizados.
-     * @throws SQLException
      */
-    public int deleteLibro(int valorIsbn) throws SQLException {
+    public int deleteLibro(int valorIsbn) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -146,7 +146,9 @@ public class LibroDaoJDBC {
             stmt.setInt(1, valorIsbn);
             rows = stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Ejecutado correctamente.", "Succed", JOptionPane.INFORMATION_MESSAGE);
-            JOptionPane.showMessageDialog(null, "Registros Borrados: " + rows, "Succed", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            Logger.getLogger(LibroDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se pudo borrar el libro.", "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             Conexion.close(stmt);
             if (this.userConn == null) {
@@ -157,12 +159,11 @@ public class LibroDaoJDBC {
     }
 
     /**
-     *
+     * Método que hace un select según la opción elegida y el dato recibido.
      * @param valorSelect
      * @param valor
-     * @throws SQLException
      */
-    public void selectLibro(int valorSelect, String valor) throws SQLException {
+    public void selectLibro(int valorSelect, String valor) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -221,6 +222,9 @@ public class LibroDaoJDBC {
             while (rs.next()) {
 
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(LibroDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se pudo hacer la consulta.", "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             Conexion.close(rs);
             Conexion.close(stmt);
@@ -236,9 +240,8 @@ public class LibroDaoJDBC {
      * este Array borrando los datos que ya contenía.
      *
      * @return
-     * @throws java.sql.SQLException
      */
-    public ArrayList<LibroDTO> refreshArrayLibro() throws SQLException {
+    public ArrayList<LibroDTO> refreshArrayLibro() {
         ArrayList<LibroDTO> libros = new ArrayList<LibroDTO>();
         sql_SELECT = "SELECT isbn,autor,titulo,idGenero FROM libros";
         //Borramos arrayList
@@ -258,6 +261,9 @@ public class LibroDaoJDBC {
                 LibroDTO libro = new LibroDTO(rs.getInt("isbn"), rs.getString("autor"), rs.getString("titulo"), rs.getInt("idGenero"));
                 libros.add(libro);
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(LibroDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se puddieron cargar los datos.", "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             Conexion.close(rs);
             Conexion.close(stmt);
@@ -273,9 +279,8 @@ public class LibroDaoJDBC {
      * este Array borrando los datos que ya contenía.
      *
      * @return
-     * @throws java.sql.SQLException
      */
-    public ArrayList<GeneroDTO> refreshArrayGenero() throws SQLException {
+    public ArrayList<GeneroDTO> refreshArrayGenero() {
         ArrayList<GeneroDTO> generos = new ArrayList<GeneroDTO>();
         sql_SELECT = "SELECT idGenero,genero FROM generos";
         generos.clear();
@@ -294,6 +299,9 @@ public class LibroDaoJDBC {
                 GeneroDTO gen = new GeneroDTO(rs.getInt("idGenero"), rs.getString("genero"));
                 generos.add(gen);
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(LibroDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se puddieron cargar los datos.", "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             Conexion.close(rs);
             Conexion.close(stmt);
@@ -340,6 +348,7 @@ public class LibroDaoJDBC {
 
         } catch (SQLException ex) {
             Logger.getLogger(LibroDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se puddieron crear las tablas.", "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             if (this.userConn == null) {
                 Conexion.close(conn);
@@ -374,6 +383,7 @@ public class LibroDaoJDBC {
             }
         } catch (SQLException ex) {
             Logger.getLogger(LibroDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se puddieron cargar los datos iniciales.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(LibroDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -414,6 +424,7 @@ public class LibroDaoJDBC {
             }
         } catch (SQLException ex) {
             Logger.getLogger(LibroDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se puddieron cargar los datos.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(LibroDaoJDBC.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

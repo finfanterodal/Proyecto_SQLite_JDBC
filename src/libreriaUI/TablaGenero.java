@@ -107,7 +107,6 @@ public class TablaGenero extends javax.swing.JFrame {
      * interfaz.
      */
     public void cargarTablaGeneros() {
-        try {
             //Cargamos la tabla de la interfaz con los datos de la base que están almacenados en un Array
             LibroDaoJDBC li = new LibroDaoJDBC();
             DefaultTableModel model = (DefaultTableModel) tableGenero.getModel();
@@ -117,10 +116,6 @@ public class TablaGenero extends javax.swing.JFrame {
                 Object[] row = {gen.get(j).getIdGenero(), gen.get(j).getGenero()};
                 model.addRow(row);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(TablaGenero.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
     /**

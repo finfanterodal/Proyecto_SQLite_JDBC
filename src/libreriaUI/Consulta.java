@@ -103,8 +103,6 @@ public class Consulta extends javax.swing.JFrame {
             TablaLibro tlibro = new TablaLibro();
             tlibro.setVisible(true);
             this.setVisible(false);
-        } catch (SQLException ex) {
-            Logger.getLogger(Consulta.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Error al introducir el dato.", "Error", JOptionPane.ERROR_MESSAGE);
         }

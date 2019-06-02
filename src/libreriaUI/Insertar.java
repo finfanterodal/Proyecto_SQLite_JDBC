@@ -141,10 +141,9 @@ public class Insertar extends javax.swing.JFrame {
         try {
 
             LibroDaoJDBC li = new LibroDaoJDBC();
-            li.insertLibro(new LibroDTO(Integer.parseInt(isbnText.getText()), autorText.getText(), tituloText.getText(), idGeneroCombo.getSelectedIndex() + 1));
+            int rows = li.insertLibro(new LibroDTO(Integer.parseInt(isbnText.getText()), autorText.getText(), tituloText.getText(), idGeneroCombo.getSelectedIndex() + 1));
+            JOptionPane.showMessageDialog(null, "Registros insertados: " + rows, "Succed", JOptionPane.INFORMATION_MESSAGE);
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "No has introducido isbn.", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No has introducido isbn.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         TablaLibro tlibro = new TablaLibro();

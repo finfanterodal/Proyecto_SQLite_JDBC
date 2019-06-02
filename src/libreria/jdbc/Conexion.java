@@ -77,7 +77,7 @@ public class Conexion {
     }
 
     /**
-     * Connect to a sample database
+     * Crear una nueva base de datos.
      *
      */
     public static void createNewDatabas() {

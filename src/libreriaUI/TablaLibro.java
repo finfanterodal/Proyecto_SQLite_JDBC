@@ -202,11 +202,8 @@ public class TablaLibro extends javax.swing.JFrame {
         if (fila == -1) {
 
         } else {
-            try {
-                li.deleteLibro(Integer.parseInt(tableLibro.getValueAt(fila, 0).toString()));
-            } catch (SQLException ex) {
-                Logger.getLogger(TablaLibro.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            int rows = li.deleteLibro(Integer.parseInt(tableLibro.getValueAt(fila, 0).toString()));
+            JOptionPane.showMessageDialog(null, "Registros Borrados: " + rows, "Succed", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
@@ -221,7 +218,6 @@ public class TablaLibro extends javax.swing.JFrame {
      * interfaz.
      */
     public void cargarTablaLibros() {
-        try {
             //Cargamos la tabla de la interfaz con los datos de la base que están almacenados en un Array
             LibroDaoJDBC li = new LibroDaoJDBC();
             DefaultTableModel model = (DefaultTableModel) tableLibro.getModel();
@@ -231,10 +227,6 @@ public class TablaLibro extends javax.swing.JFrame {
                 Object[] row = {libro.get(j).getIsbn(), libro.get(j).getAutor(), libro.get(j).getTitulo(), libro.get(j).getIdGenero()};
                 model.addRow(row);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(TablaLibro.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
     /**
