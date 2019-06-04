@@ -34,7 +34,7 @@ public class Conexion {
     //Close objeto ResulSet
 
     /**
-     *
+     *Método que cierra el objeto de tipo ResultSet.
      * @param rs
      */
     public static void close(ResultSet rs) {
@@ -49,7 +49,7 @@ public class Conexion {
   //Cerramos el objeto PreparedStatement
 
     /**
-     *
+     * Método que cierra el objeto de tipo PreparedStatement.
      * @param stmt
      */
     public static void close(PreparedStatement stmt) {
@@ -64,7 +64,7 @@ public class Conexion {
     //Cerramos la conexión
 
     /**
-     *
+     * Método que cierra la conexión, el objeto de tipo Connection.
      * @param conn
      */
     public static void close(Connection conn) {
