@@ -85,7 +85,8 @@ public class LibroDaoJDBC {
 
     /**
      * Método que ejecuta la sentencia UPDATE, recibiendo un objeto de tipo
-     * Libro con los valores que se desean modificar y el identificador.
+     * Libro con los valores que se desean modificar y el identificador, y que devuelve el número
+     * de registros actualizados.
      *
      * @param libro Objeto de LibroDTO
      * @return rows nñumero de registros realizados
