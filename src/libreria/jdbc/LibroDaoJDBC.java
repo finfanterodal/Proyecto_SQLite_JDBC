@@ -361,7 +361,7 @@ public class LibroDaoJDBC {
     }
 
     /**
-     * Añadimos datos de un fichero a la tabla de Generos.
+     * Añadimos datos de un fichero a la tabla de Generos .
      *
      *
      */
@@ -399,7 +399,7 @@ public class LibroDaoJDBC {
     }
 
     /**
-     * Añadimos datos de un fichero a la tabla de Generos.
+     * Añadimos datos de un fichero a la tabla de Generos .
      *
      *
      */
@@ -442,7 +442,7 @@ public class LibroDaoJDBC {
 
     /**
      * Método para inicializar el programa si la base de datos aún no fue
-     * creada.
+     * creada .
      */
     public void init() {
 
