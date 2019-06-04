@@ -22,7 +22,8 @@ public class Conexion {
     //Carga del driver y conexión
 
     /**
-     *
+     * Método static que devuelve un objeto de tipo Conection y lanza una excepción 
+     * por si no es posible establecer la conexión que es recogida por los métodos de la clase LibroDaoJDBC que lo llaman.
      * @return
      * @throws SQLException
      */
