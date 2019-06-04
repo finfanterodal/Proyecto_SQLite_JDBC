@@ -161,11 +161,12 @@ public class LibroDaoJDBC {
     }
 
     /**
-     * Método que hace un select según la opción elegida y el dato recibido.
+     * Método que hace un select según la opción elegida en la interfaz, que le pasará un valor 
+     * y en este caso devolvemos un String que es la consulta.
      * @param valorSelect
      * @param valor
      */
-    public void selectLibro(int valorSelect, String valor) {
+    public String selectLibro(int valorSelect, String valor) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -233,6 +234,7 @@ public class LibroDaoJDBC {
             if (this.userConn == null) {
                 Conexion.close(conn);
             }
+            return vconsulta;
         }
     }
 
