@@ -240,8 +240,8 @@ public class LibroDaoJDBC {
 
     /**
      *
-     * Hace un select de la base de datos de todos los libros y los carga en
-     * este Array borrando los datos que ya contenía.
+     *  Hace un select de la base de datos de todos los libros y los carga en
+     * este Array borrando los datos que ya contenía .
      *
      * @return
      */
@@ -279,8 +279,8 @@ public class LibroDaoJDBC {
     }
 
     /**
-     * Hace un select de la base de datos de todos los generos y los carga en
-     * este Array borrando los datos que ya contenía.
+     *  Hace un select de la base de datos de todos los generos y los carga en
+     * este Array borrando los datos que ya contenía .
      *
      * @return
      */
