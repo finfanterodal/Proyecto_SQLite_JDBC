@@ -317,7 +317,7 @@ public class LibroDaoJDBC {
     }
 
     /**
-     * Creamos las tablas que utilizamos en nuestra base de datos.
+     * Creamos las tablas que utilizamos en nuestra base de datos .
      *
      *
      */
