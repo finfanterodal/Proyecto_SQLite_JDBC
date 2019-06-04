@@ -47,7 +47,8 @@ public class LibroDaoJDBC {
 
     /**
      * Método que ejecuta la sentencia INSERT, recibiendo un objeto de tipo
-     * LibroDTO dónde se guardan los datos que se deben insertar.
+     * LibroDTO dónde se guardan los datos que se deben insertar, tratando las excepciones necesarias 
+     * y que devuelve el número de registros insertados.
      *
      * @param libro
      * @return rows número de registros realizados.
