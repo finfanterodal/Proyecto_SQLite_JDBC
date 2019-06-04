@@ -128,7 +128,7 @@ public class LibroDaoJDBC {
 
     /**
      * Método que lanza una sentencia de DELETE dado el PRIMARY KEY de un libro,
-     * el isbn.
+     * el isbn y devuelve el número de registros borrados.
      *
      * @param valorIsbn
      * @return int número de registros realizados.
